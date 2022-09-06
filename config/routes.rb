@@ -7,10 +7,12 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
 Rails.application.routes.draw do
+  resources :orders
   resources :line_items
   resources :carts
   root 'store#index', as: 'store_index'
   resources :products
+  patch 'line_items/:id/decrement', to: 'line_items#decrement', as: :item_decrement
   # For details on the DSL available within this file, see
   # https://guides.rubyonrails.org/routing.html
 end
