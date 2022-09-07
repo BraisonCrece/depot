@@ -1,0 +1,17 @@
+<h1>Product <%= @product.title %> </h1>
+
+<% @product.orders.each do |order| %>
+  <h3>Order id --> <%= order.id %></h3>
+  <ul>
+    <li>Shipped to: <%= order.address %></li>
+    <% order.line_items.each do |item| %>
+      <li>Product: <%= item.product.title %></li>
+      <li>Quantity: <%= item.quantity %></li>
+      <li>Total price: <%= number_to_currency item.total_price %></li>
+      <hr/>
+    <% end %>
+    <li>TOTAL: <%= number_to_currency order.line_items.map(&:total_price).sum %></li>
+  </ul>
+  <br/><br/>
+  <p>Paid by: <%= order.pay_type %>
+<% end %>

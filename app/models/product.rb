@@ -6,7 +6,9 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
+
 class Product < ApplicationRecord
+  
   has_many :line_items
   has_many :orders, through: :line_items
   before_destroy :ensure_not_referenced_by_any_line_item
