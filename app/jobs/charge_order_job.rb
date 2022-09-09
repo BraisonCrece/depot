@@ -6,12 +6,12 @@
 # We make no guarantees that this code is fit for any purpose.
 # Visit http://www.pragmaticprogrammer.com/titles/rails6 for more book information.
 #---
-class StoreController < ApplicationController
-  include CurrentCart
-  skip_before_action :authorize
-  before_action :set_cart
-  
-  def index
-    @products = Product.order(:title)
+class ChargeOrderJob < ApplicationJob
+  queue_as :default
+
+  def perform(order,pay_type_params)
+
+    order.charge!(pay_type_params)
+
   end
 end

@@ -1,6 +1,7 @@
 require "application_system_test_case"
 
 class OrdersTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
   setup do
     @order = orders(:one)
   end
@@ -13,15 +14,7 @@ class OrdersTest < ApplicationSystemTestCase
   test "creating a Order" do
     visit orders_url
     click_on "New Order"
-
-    fill_in "Address", with: @order.address
-    fill_in "Email", with: @order.email
-    fill_in "Name", with: @order.name
-    fill_in "Pay type", with: @order.pay_type
-    click_on "Create Order"
-
-    assert_text "Order was successfully created"
-    click_on "Back"
+    assert_text "Your cart is empty"
   end
 
   test "updating a Order" do
@@ -31,8 +24,7 @@ class OrdersTest < ApplicationSystemTestCase
     fill_in "Address", with: @order.address
     fill_in "Email", with: @order.email
     fill_in "Name", with: @order.name
-    fill_in "Pay type", with: @order.pay_type
-    click_on "Update Order"
+    click_on "commit"
 
     assert_text "Order was successfully updated"
     click_on "Back"
@@ -46,4 +38,6 @@ class OrdersTest < ApplicationSystemTestCase
 
     assert_text "Order was successfully destroyed"
   end
+
+
 end
